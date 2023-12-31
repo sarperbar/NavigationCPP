@@ -241,8 +241,8 @@ void printCities(const CityInfo _City[], int plateNum) {
 
 
 int main() {
-    ifstream File_In_CityDistances("/Users/sarpererbar/Programs/C++/CENG383_2/CENG383_2/Resources/CityDistances.txt");
-    ifstream File_In_AdjacentCities("/Users/sarpererbar/Programs/C++/CENG383_2/CENG383_2/Resources/adjacent_cities.txt");
+    ifstream File_In_CityDistances("Resources/CityDistances.txt");
+    ifstream File_In_AdjacentCities("Resources/adjacent_cities.txt");
            
     string NextLineOfAdjacentCities;
     string NextLineOfCityDistances;
