@@ -151,7 +151,18 @@ public:
             cout<<endl;
             cout<<"Total Distance: "<< sumDistance<<endl;
         }
-    };
+    
+    int directionCity(int _cityPlateNum) const {
+         int distanceToMain = -1;
+            distanceToMain = distances[_cityPlateNum-1];
+         if (distanceToMain != -1) {
+             return distanceToMain;
+         } else {
+             return -1;
+         }
+     }
+ };
+    
 
 
 
@@ -241,13 +252,24 @@ void printCities(const CityInfo _City[], int plateNum) {
 
 
 int main() {
+    
+    
+    cout << "**************************" <<endl;
+    cout << "|                        |" << endl;
+    cout << "|      Sarper ERBAR      |" << endl;
+    cout << "|       202011001        |" << endl;
+    cout << "|                        |" << endl;
+    cout << "**************************" << endl;
+    cout<<endl;
+    cout<<endl;
+    cout<<endl;
+    
+    
     ifstream File_In_CityDistances("Resources/CityDistances.txt");
     ifstream File_In_AdjacentCities("Resources/adjacent_cities.txt");
            
     string NextLineOfAdjacentCities;
     string NextLineOfCityDistances;
-
-    CityInfo CityOfTurkey[82];
 
     if (File_In_AdjacentCities.is_open() && File_In_CityDistances.is_open()) {
         getline(File_In_CityDistances, NextLineOfCityDistances, '\n');
@@ -268,6 +290,8 @@ int main() {
             setNeighbourCityDataFromFile(CityOfTurkey, NextLineOfAdjacentCities_stream);
         }
     }
+    
+    CityOfTurkey[6].printInfo();
     string userCityName = " ";
     int userPlateNumber=-1;
     while (true) {
@@ -276,6 +300,7 @@ int main() {
             cout << "b. Print selected city" << endl;
             cout << "c. List k closest cities" << endl;
             cout << "d. Find shortest path to" << endl;
+            cout << "e. Distance to" << endl;
             cout << "x. Exit" << endl;
 
             cout << "Enter your choice: ";
@@ -323,16 +348,41 @@ int main() {
                     
                     break;
                 }
+                case 'e': {
+                    cout << "Enter Direction City ";
+                    string directionCity;
+                    int directionPlateNum=-1;
+                    int distanceTo=-1;
+                   getline(cin, directionCity);
+                    
+                    for (int i = 0; i <= 81; i++) {
+                        if (CityOfTurkey[i].getCityName() == directionCity) {
+                            directionPlateNum = CityOfTurkey[i].getPlateNum();
+                            break;
+                            
+                        }
+                       }
+                     distanceTo = CityOfTurkey[userPlateNumber].directionCity(directionPlateNum);
+
+                    
+                    cout<<"Distance from "<< CityOfTurkey[userPlateNumber].getCityName()<<" to "<< directionCity<<" is "<< distanceTo<<endl;
+                    
+                    
+                    
+                    
+                    
+                    break;
+                }
                 case 'x':
                     File_In_CityDistances.close();
                     File_In_AdjacentCities.close();
                     return 0;
                 default:
-                    cout << "Invalid choice. Try again." << endl;
+                    cout << "Invalid choice. Try again !!!" << endl;
             }
         }
     
-    
+
     
     
 
